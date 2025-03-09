@@ -15,7 +15,7 @@ return [
     */
 
   'starwars' => [
-    'url' => env('STAR_WARS_API_URL'),
+    'url' => env('STAR_WARS_API_URL', 'https://swapi.dev/api'),
   ],
 
   'postmark' => [
