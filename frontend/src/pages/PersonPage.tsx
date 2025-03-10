@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Person } from "../services/apiTypes";
-import { getPerson, getPersonFilms } from "../services/apiService";
+import { getPerson } from "../services/apiService";
 
 const PersonPage = () => {
   const { id } = useParams();
@@ -11,8 +11,6 @@ const PersonPage = () => {
   const fetchPerson = useCallback(async (id: number) => {
     try {
       const person = await getPerson(id);
-      const filmData = await getPersonFilms(person);
-      person.filmsData = filmData;
 
       setPerson(person);
     } catch (err) {
@@ -52,12 +50,12 @@ const PersonPage = () => {
             <div className="w-[45%]">
               <h3 className="font-bold text-[16px]">Movies</h3>
               <div className="w-full h-[1px] mt-[10px] mb-[5px] bg-pinkish-grey"></div>
-              {person.filmsData && person.filmsData.map((film, index) => (
+              {person.films.map((film, index) => (
                 <span key={film.id}>
                   <Link to={`/films/${film.id}`} className="text-dodger-blue cursor-pointer">
                     {film.title}
                   </Link>
-                  {person.filmsData && index !== person.filmsData.length - 1 && ', '}
+                  {index !== person.films.length - 1 && ', '}
                 </span>
               ))}
 
