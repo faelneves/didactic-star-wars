@@ -20,7 +20,9 @@ class StarWarsService
 
   public function getPerson(int $id): PersonDTO
   {
-    return $this->repository->getPerson($id);
+    $person = $this->repository->getPerson($id);
+    $films = $this->repository->getFilmsDetails($person->filmsIds);
+    return $person->withFilms($films);
   }
 
   /**
@@ -33,6 +35,8 @@ class StarWarsService
 
   public function getFilm(int $id): FilmDTO
   {
-    return $this->repository->getFilm($id);
+    $film = $this->repository->getFilm($id);
+    $characters = $this->repository->getCharacterDetails($film->characterIds);
+    return $film->withCharacters($characters);
   }
 }
