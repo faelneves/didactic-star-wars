@@ -6,6 +6,16 @@ export interface SearchResult {
   title?: string;
 }
 
+export interface PersonDetail {
+  id: number,
+  name: string
+}
+
+export interface FilmDetail {
+  id: number,
+  title: string
+}
+
 export interface Person {
   id: number,
   name: string,
@@ -17,8 +27,8 @@ export interface Person {
   birth_year: string,
   gender: string,
   species: number[],
-  films: number[],
-  filmsData?: Film[],
+  filmsIds: number[],
+  films: FilmDetail[],
   vehicles: number[],
   starships: number[]
 }
@@ -32,7 +42,7 @@ export interface Film {
   producer: string,
   releaseDate: string,
   characterIds: number[],
-  characterData?: Person[],
+  characters: PersonDetail[],
   planetIds: number[],
   starshipIds: number[],
   vehicleIds: number[],

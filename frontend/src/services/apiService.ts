@@ -7,7 +7,6 @@ const API_BASE = process.env.REACT_APP_SW_API_BASE || 'http://localhost:8000/api
 export const searchSWAPI = async (resource: SWAPIResource, query: string): Promise<SearchResult[]> => {
   const url = `${API_BASE}/${resource}/search?filter=${encodeURIComponent(query)}`;
 
-
   const cached = cache.get<SWAPIResponse>(url);
   if (cached) return cached.results;
 
@@ -52,13 +51,3 @@ export const getFilm = async (id: number): Promise<Film> => {
   cache.set(url, data);
   return data;
 };
-
-export const getFilmCharacters = async (film: Film): Promise<Person[]> => {
-  const characters = await Promise.all(film.characterIds.map(id => getPerson(id)));
-  return characters;
-}
-
-export const getPersonFilms = async (person: Person): Promise<Film[]> => {
-  const films = await Promise.all(person.films.map(id => getFilm(id)));
-  return films;
-}
