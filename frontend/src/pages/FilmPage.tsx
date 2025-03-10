@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { Film } from "../services/apiTypes";
 import { useEffect, useState } from "react";
-import { getFilm, getFilmCharacters } from "../services/apiService";
+import { getFilm } from "../services/apiService";
 
 const FilmPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -11,8 +11,6 @@ const FilmPage = () => {
   const fetchFilm = async (id: number) => {
     try {
       const film = await getFilm(id);
-      const filmData = await getFilmCharacters(film)
-      film.characterData = filmData;
 
       setFilm(film);
     } catch (err) {
@@ -45,12 +43,12 @@ const FilmPage = () => {
             <div className="w-[45%]">
               <h3 className="font-bold text-[16px]">Characters</h3>
               <div className="w-full h-[1px] mt-[10px] mb-[5px] bg-pinkish-grey"></div>
-              {film.characterData && film.characterData.map((character, index) => (
+              {film.characters.map((character, index) => (
                 <span key={character.id}>
                   <Link to={`/people/${character.id}`} className="text-dodger-blue cursor-pointer">
                     {character.name}
                   </Link>
-                  {film.characterData && index !== film.characterData.length - 1 && ', '}
+                  {index !== film.characters.length - 1 && ', '}
                 </span>
               ))}
 
