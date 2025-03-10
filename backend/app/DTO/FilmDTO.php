@@ -2,6 +2,8 @@
 
 namespace App\DTO;
 
+use App\Utils\UrlHelper;
+
 class FilmDTO
 {
   public function __construct(
@@ -13,16 +15,17 @@ class FilmDTO
     public readonly string $producer,
     public readonly string $releaseDate,
     public readonly array $characterIds,
+    public readonly array $characters,
     public readonly array $planetIds,
     public readonly array $starshipIds,
     public readonly array $vehicleIds,
     public readonly array $speciesIds
   ) {}
 
-  public static function fromSwapiResponse(array $data): self
+  public static function fromSwapiResponse(array $data, array $characters = []): self
   {
     return new self(
-      id: self::extractIdFromUrl($data['url']),
+      id: UrlHelper::extractSwapiId($data['url']),
       title: $data['title'],
       episodeId: $data['episode_id'],
       openingCrawl: $data['opening_crawl'],
@@ -30,6 +33,7 @@ class FilmDTO
       producer: $data['producer'],
       releaseDate: $data['release_date'],
       characterIds: self::extractResourceIds($data['characters']),
+      characters: $characters,
       planetIds: self::extractResourceIds($data['planets']),
       starshipIds: self::extractResourceIds($data['starships']),
       vehicleIds: self::extractResourceIds($data['vehicles']),
@@ -37,14 +41,27 @@ class FilmDTO
     );
   }
 
-  private static function extractIdFromUrl(string $url): int
+  public function withCharacters(array $characters): self
   {
-    preg_match('/\/(\d+)\/$/', $url, $matches);
-    return (int) $matches[1];
+    return new self(
+      $this->id,
+      $this->title,
+      $this->episodeId,
+      $this->openingCrawl,
+      $this->director,
+      $this->producer,
+      $this->releaseDate,
+      $this->characterIds,
+      $characters,
+      $this->planetIds,
+      $this->starshipIds,
+      $this->vehicleIds,
+      $this->speciesIds
+    );
   }
 
   private static function extractResourceIds(array $urls): array
   {
-    return array_map(fn($url) => self::extractIdFromUrl($url), $urls);
+    return array_map(fn($url) => UrlHelper::extractSwapiId($url), $urls);
   }
 }

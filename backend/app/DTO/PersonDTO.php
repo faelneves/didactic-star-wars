@@ -2,6 +2,9 @@
 
 namespace App\DTO;
 
+use App\Utils\UrlHelper;
+use Illuminate\Support\Arr;
+
 class PersonDTO
 {
   public function __construct(
@@ -15,15 +18,16 @@ class PersonDTO
     public readonly string $birth_year,
     public readonly string $gender,
     public readonly array $species,
+    public readonly array $filmsIds,
     public readonly array $films,
-    public readonly array $vehicles,
-    public readonly array $starships
+    public readonly array $vehiclesIds,
+    public readonly array $starshipsIds
   ) {}
 
-  public static function fromSwapiResponse(array $data): self
+  public static function fromSwapiResponse(array $data, array $films = []): self
   {
     return new self(
-      id: self::extractIdFromUrl($data['url']),
+      id: UrlHelper::extractSwapiId($data['url']),
       name: $data['name'],
       height: $data['height'],
       mass: $data['mass'],
@@ -33,20 +37,35 @@ class PersonDTO
       birth_year: $data['birth_year'],
       gender: $data['gender'],
       species: self::extractResourceIds($data['species']),
-      films: self::extractResourceIds($data['films']),
-      vehicles: self::extractResourceIds($data['vehicles']),
-      starships: self::extractResourceIds($data['starships'])
+      filmsIds: self::extractResourceIds($data['films']),
+      films: $films,
+      vehiclesIds: self::extractResourceIds($data['vehicles']),
+      starshipsIds: self::extractResourceIds($data['starships'])
     );
   }
 
-  private static function extractIdFromUrl(string $url): int
+  public function withFilms(array $films): self
   {
-    preg_match('/\/(\d+)\/$/', $url, $matches);
-    return (int) $matches[1];
+    return new self(
+      $this->id,
+      $this->name,
+      $this->height,
+      $this->mass,
+      $this->hair_color,
+      $this->skin_color,
+      $this->eye_color,
+      $this->birth_year,
+      $this->gender,
+      $this->species,
+      $this->filmsIds,
+      $films,
+      $this->vehiclesIds,
+      $this->starshipsIds
+    );
   }
 
   private static function extractResourceIds(array $urls): array
   {
-    return array_map(fn($url) => self::extractIdFromUrl($url), $urls);
+    return array_map(fn($url) => UrlHelper::extractSwapiId($url), $urls);
   }
 }
