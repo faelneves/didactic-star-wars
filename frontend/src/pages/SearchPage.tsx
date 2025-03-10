@@ -91,7 +91,7 @@ const SearchPage = () => {
                   <div key={item.id}>
                     <div className="flex justify-between items-center">
                       <span className="text-[16px] font-bold">{item.name || item.title}</span>
-                      <Link to={`/${selectedType === 'films' ? 'movies' : selectedType}/${item.id}`}>
+                      <Link to={`/${selectedType}/${item.id}`}>
                         <button className="bg-green-teal text-white font-bold py-[8px] px-[20px] rounded-[17px]">SEE DETAILS</button>
                       </Link>
                     </div>
