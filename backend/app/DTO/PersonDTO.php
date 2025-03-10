@@ -17,10 +17,7 @@ class PersonDTO
     public readonly array $species,
     public readonly array $films,
     public readonly array $vehicles,
-    public readonly array $starships,
-    public readonly string $created,
-    public readonly string $edited,
-    public readonly string $url
+    public readonly array $starships
   ) {}
 
   public static function fromSwapiResponse(array $data): self
@@ -38,10 +35,7 @@ class PersonDTO
       species: self::extractResourceIds($data['species']),
       films: self::extractResourceIds($data['films']),
       vehicles: self::extractResourceIds($data['vehicles']),
-      starships: self::extractResourceIds($data['starships']),
-      created: $data['created'],
-      edited: $data['edited'],
-      url: $data['url']
+      starships: self::extractResourceIds($data['starships'])
     );
   }
 
