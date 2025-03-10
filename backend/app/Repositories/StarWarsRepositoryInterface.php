@@ -2,10 +2,18 @@
 
 namespace App\Repositories;
 
+use App\DTO\FilmDTO;
 use App\DTO\PersonDTO;
 
 interface StarWarsRepositoryInterface
 {
+  /**
+   * @return array<FilmDTO>
+   */
+  public function searchFilm(string $searchTerm): array;
+
+  public function getFilm(int $id): FilmDTO;
+
   /**
    * @return array<PersonDTO>
    */
