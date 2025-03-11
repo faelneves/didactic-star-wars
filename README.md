@@ -31,7 +31,7 @@ root/
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo/didactic-star-wars.git
+   git clone https://github.com/faelneves/didactic-star-wars.git
    cd didactic-star-wars
    ```
 
