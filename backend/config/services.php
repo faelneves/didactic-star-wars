@@ -16,6 +16,7 @@ return [
 
   'starwars' => [
     'url' => env('STAR_WARS_API_URL', 'https://swapi.dev/api'),
+    'cache_ttl' => env('STARWARS_CACHE_TTL', 3600),
   ],
 
   'postmark' => [
