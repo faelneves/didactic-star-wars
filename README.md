@@ -7,7 +7,6 @@ Didactic Star Wars is a project that consumes the [SWAPI](https://swapi.dev/) (S
 
 ## Table of Contents
 - [Requirements](#requirements)
-- [Project Structure](#project-structure)
 - [Installation and Setup](#installation-and-setup)
 - [Running the Application](#running-the-application)
 - [Running Tests](#running-tests)
@@ -18,14 +17,6 @@ Ensure you have the following installed on your machine before running the proje
 
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/)
-
-## Project Structure
-```
-root/
-│── backend/        # Laravel REST API
-│── frontend/       # React + Vite application
-│── docker-compose.yml  # Docker configuration file
-```
 
 ## Installation and Setup
 
