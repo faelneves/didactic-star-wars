@@ -1,11 +1,10 @@
 import { Film, Person, SearchResult, SWAPIResource, SWAPIResponse } from './apiTypes';
 import { cache } from '../utils/cache';
+import { VITE_SW_API_BASE } from '../constants';
 
-
-const API_BASE = import.meta.env.VITE_SW_API_BASE || 'http://localhost:8000/api/v1';
 
 export const searchSWAPI = async (resource: SWAPIResource, query: string): Promise<SearchResult[]> => {
-  const url = `${API_BASE}/${resource}/search?filter=${encodeURIComponent(query)}`;
+  const url = `${VITE_SW_API_BASE}/${resource}/search?filter=${encodeURIComponent(query)}`;
 
   const cached = cache.get<SWAPIResponse>(url);
   if (cached) return cached.results;
@@ -21,7 +20,7 @@ export const searchSWAPI = async (resource: SWAPIResource, query: string): Promi
 };
 
 export const getPerson = async (id: number): Promise<Person> => {
-  const url = `${API_BASE}/people/${id}`;
+  const url = `${VITE_SW_API_BASE}/people/${id}`;
 
   const cached = cache.get<Person>(url);
   if (cached) return cached;
@@ -37,7 +36,7 @@ export const getPerson = async (id: number): Promise<Person> => {
 };
 
 export const getFilm = async (id: number): Promise<Film> => {
-  const url = `${API_BASE}/films/${id}`;
+  const url = `${VITE_SW_API_BASE}/films/${id}`;
 
   const cached = cache.get<Film>(url);
   if (cached) return cached;
