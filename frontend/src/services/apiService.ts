@@ -2,7 +2,7 @@ import { Film, Person, SearchResult, SWAPIResource, SWAPIResponse } from './apiT
 import { cache } from '../utils/cache';
 
 
-const API_BASE = process.env.REACT_APP_SW_API_BASE || 'http://localhost:8000/api/v1';
+const API_BASE = import.meta.env.VITE_SW_API_BASE || 'http://localhost:8000/api/v1';
 
 export const searchSWAPI = async (resource: SWAPIResource, query: string): Promise<SearchResult[]> => {
   const url = `${API_BASE}/${resource}/search?filter=${encodeURIComponent(query)}`;

@@ -1,9 +1,9 @@
-import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import SearchPage from './pages/SearchPage';
-import Layout from './components/Layout';
-import PersonPage from './pages/PersonPage';
-import FilmPage from './pages/FilmPage';
+import './App.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Layout from './components/Layout'
+import SearchPage from './pages/SearchPage'
+import PersonPage from './pages/PersonPage'
+import FilmPage from './pages/FilmPage'
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         </Routes>
       </Layout >
     </BrowserRouter >
-  );
+  )
 }
 
-export default App;
+export default App

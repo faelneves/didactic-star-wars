@@ -1,4 +1,3 @@
-# React-specific ignores
 /node_modules
 /build
 .env

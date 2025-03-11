@@ -15,8 +15,8 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/app
-    command: sh -c "npm install && npm start"
+    command: sh -c "npm install && npm run dev"
     environment:
-      - REACT_APP_SW_API_BASE=http://localhost:8000/api/v1
+      - VITE_SW_API_BASE=http://localhost:8000/api/v1
     depends_on:
       - backend
