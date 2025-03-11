@@ -24,11 +24,12 @@ class StarWarsApiRepository implements StarWarsRepositoryInterface
 
   public function searchFilm(string $searchTerm): array
   {
-    $response = Http::get($this->baseUrl . '/films/?search=' . $searchTerm)->throw();
+    $url = $this->baseUrl . '/films/?search=' . urlencode($searchTerm);
+    $results = $this->fetchPaginatedResults($url);
 
     return array_map(
       fn($item) => FilmDTO::fromSwapiResponse($item),
-      $response->json()['results']
+      $results
     );
   }
 
@@ -49,11 +50,12 @@ class StarWarsApiRepository implements StarWarsRepositoryInterface
 
   public function searchPeople(string $searchTerm): array
   {
-    $response = Http::get($this->baseUrl . '/people/?search=' . $searchTerm)->throw();
+    $url = $this->baseUrl . '/people/?search=' . urlencode($searchTerm);
+    $results = $this->fetchPaginatedResults($url);
 
     return array_map(
       fn($item) => PersonDTO::fromSwapiResponse($item),
-      $response->json()['results']
+      $results
     );
   }
 
@@ -114,5 +116,20 @@ class StarWarsApiRepository implements StarWarsRepositoryInterface
         'title' => $data['title']
       ];
     }, $responses);
+  }
+
+  private function fetchPaginatedResults(string $url): array
+  {
+    $results = [];
+
+    while ($url) {
+      $response = Http::get($url)->throw();
+      $data = $response->json();
+
+      $results = array_merge($results, $data['results']);
+      $url = $data['next'];
+    }
+
+    return $results;
   }
 }
