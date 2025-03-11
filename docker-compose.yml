@@ -6,14 +6,21 @@ services:
     volumes:
       - ./backend:/app
     command: sh -c "composer install && php artisan key:generate && php artisan serve --host=0.0.0.0 --port=8000"
-  
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:8000 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
   scheduler:
     build: ./backend
     volumes:
       - ./backend:/app
-    command: php artisan schedule:work
+    command: sh -c "echo 'Waiting for backend to be ready...' && sleep 30 && php artisan schedule:work"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
 
   frontend:
     build: ./frontend
