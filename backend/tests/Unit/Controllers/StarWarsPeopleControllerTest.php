@@ -34,12 +34,10 @@ class StarWarsPeopleControllerTest extends TestCase
       birth_year: '19BBY',
       gender: "male",
       species: [],
+      filmsIds: [],
       films: [],
-      vehicles: [],
-      starships: [],
-      created: '2014-12-09T13:50:51.644000Z',
-      edited: '2014-12-20T21:17:56.891000Z',
-      url: 'https://swapi.dev/api/people/1/'
+      vehiclesIds: [],
+      starshipsIds: []
     );
 
     $this->serviceMock
@@ -65,11 +63,9 @@ class StarWarsPeopleControllerTest extends TestCase
             'gender',
             'species',
             'films',
-            'vehicles',
-            'starships',
-            'created',
-            'edited',
-            'url'
+            'filmsIds',
+            'vehiclesIds',
+            'starshipsIds'
           ]
         ]
       ]);
@@ -103,12 +99,10 @@ class StarWarsPeopleControllerTest extends TestCase
       birth_year: '19BBY',
       gender: "male",
       species: [],
+      filmsIds: [],
       films: [],
-      vehicles: [],
-      starships: [],
-      created: '2014-12-09T13:50:51.644000Z',
-      edited: '2014-12-20T21:17:56.891000Z',
-      url: 'https://swapi.dev/api/people/1/'
+      vehiclesIds: [],
+      starshipsIds: []
     );
 
     $this->serviceMock

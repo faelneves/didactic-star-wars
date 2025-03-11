@@ -4,6 +4,7 @@ namespace Tests\Unit\Services;
 
 use PHPUnit\Framework\TestCase;
 use App\DTO\PersonDTO;
+use App\DTO\FilmDTO;
 use App\Services\StarWarsService;
 use App\Repositories\StarWarsRepositoryInterface;
 use Mockery;
@@ -36,11 +37,9 @@ class StarWarsServiceTest extends TestCase
       gender: "male",
       species: [],
       films: [],
-      vehicles: [],
-      starships: [],
-      created: '2014-12-09T13:50:51.644000Z',
-      edited: '2014-12-20T21:17:56.891000Z',
-      url: 'https://swapi.dev/api/people/1/'
+      filmsIds: [],
+      vehiclesIds: [],
+      starshipsIds: []
     );
 
     $this->repositoryMock
@@ -72,11 +71,9 @@ class StarWarsServiceTest extends TestCase
       gender: "male",
       species: [],
       films: [],
-      vehicles: [],
-      starships: [],
-      created: '2014-12-09T13:50:51.644000Z',
-      edited: '2014-12-20T21:17:56.891000Z',
-      url: 'https://swapi.dev/api/people/1/'
+      filmsIds: [],
+      vehiclesIds: [],
+      starshipsIds: []
     );
 
     $this->repositoryMock
@@ -85,10 +82,49 @@ class StarWarsServiceTest extends TestCase
       ->once()
       ->andReturn($mockDTO);
 
+    $this->repositoryMock
+      ->shouldReceive('getFilmsDetails')
+      ->with([])
+      ->once()
+      ->andReturn([]);
+
     $result = $this->service->getPerson(1);
 
     $this->assertInstanceOf(PersonDTO::class, $result);
     $this->assertEquals(1, $result->id);
     $this->assertEquals('Luke Skywalker', $result->name);
+  }
+
+  /** @test */
+  public function it_returns_film_dto_array_for_searchfilm()
+  {
+    $mockFilmDTO = new FilmDTO(
+      id: 1,
+      title: 'A New Hope',
+      episodeId: 4,
+      openingCrawl: 'It is a period of civil war...',
+      director: 'George Lucas',
+      producer: 'Gary Kurtz, Rick McCallum',
+      releaseDate: '1977-05-25',
+      characterIds: [1, 2, 3],
+      characters: [],
+      planetIds: [],
+      starshipIds: [],
+      vehicleIds: [],
+      speciesIds: []
+    );
+
+    $this->repositoryMock
+      ->shouldReceive('searchFilm')
+      ->with('hope')
+      ->once()
+      ->andReturn([$mockFilmDTO]);
+
+    $result = $this->service->searchFilm('hope');
+
+    $this->assertIsArray($result);
+    $this->assertCount(1, $result);
+    $this->assertInstanceOf(FilmDTO::class, $result[0]);
+    $this->assertEquals('A New Hope', $result[0]->title);
   }
 }
