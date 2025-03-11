@@ -76,3 +76,6 @@ The backend exposes the following routes:
 ### Films Endpoints
 - `GET /api/v1/films/search?title=<query>` - Search for films by title.
 - `GET /api/v1/films/{id}` - Retrieve details of a specific film by ID.
+
+### Metrics Endpoints
+- `GET /api/v1/metrics` - Retrieve metrics from the last 5 minutes.
