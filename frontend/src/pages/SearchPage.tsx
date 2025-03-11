@@ -27,8 +27,8 @@ const SearchPage = () => {
   };
 
   return (
-    <div className="flex gap-x-[30px] justify-center items-start">
-      <div className="custom-card w-[410px] max-w-[40%]">
+    <div className="flex gap-x-[30px] justify-center items-start flex-col md:flex-row ">
+      <div className="custom-card w-[95%] mx-auto md:mx-0 md:w-[410px] md:max-w-[40%] mb-[30px]">
         <span className="font-semibold text-strong-grey" >What are you searching for?</span>
         <form className="flex flex-col" onSubmit={handleSubmit}>
           <div className="my-[20px] font-bold flex gap-x-[30px]">
@@ -73,7 +73,7 @@ const SearchPage = () => {
         </form>
       </div>
 
-      <div className="custom-card w-[582px] max-w-[58%] p-[30px] min-h-[582px] flex flex-col">
+      <div className="custom-card w-[95%] mx-auto md:mx-0 md:w-[582px] md:max-w-[58%] p-[30px] min-h-[582px] flex flex-col">
         <span className="text-[18px] font-bold" >Results</span>
         <div className="w-full h-[1px] my-[10px] bg-pinkish-grey"></div>
         <div className="flex-1 flex flex-col items-center justify-center w-full">

@@ -23,7 +23,7 @@ const FilmPage = () => {
   }, [id]);
 
   return (
-    <div className="custom-card flex w-full min-h-[420px] relative">
+    <div className="custom-card flex w-[95%] md:w-full mx-auto min-h-[420px] relative">
 
       {!film ? (
         <div className="flex-1 flex font-bold text-pinkish-grey items-center justify-center w-full">
@@ -33,14 +33,14 @@ const FilmPage = () => {
         <div className="flex flex-1 flex-col w-full">
           <h2 className="font-bold mb-[30px] text-[18px]">{film.title}</h2>
 
-          <div className="flex w-full justify-between flex-1 mb-[30px]">
-            <div className="w-[45%]">
+          <div className="flex w-full justify-between flex-1 flex-col md:flex-row mb-[30px]">
+            <div className="w-full md:w-[45%] mb-[30px]">
               <h3 className="font-bold text-[16px]">Opening Crawl</h3>
               <div className="w-full h-[1px] mt-[10px] mb-[5px] bg-pinkish-grey"></div>
               <p className="whitespace-pre-line">{film.openingCrawl}</p>
             </div>
 
-            <div className="w-[45%]">
+            <div className="w-full md:w-[45%]">
               <h3 className="font-bold text-[16px]">Characters</h3>
               <div className="w-full h-[1px] mt-[10px] mb-[5px] bg-pinkish-grey"></div>
               {film.characters.map((character, index) => (
