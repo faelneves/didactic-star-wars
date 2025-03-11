@@ -1,9 +1,15 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "types": [
+      "node",
+      "jest",
+      "@testing-library/jest-dom"
+    ],
     "esModuleInterop": true,
     "moduleResolution": "node",
     "module": "esnext",
     "target": "esnext",
+    "jsx": "react-jsx"
   }
 }
