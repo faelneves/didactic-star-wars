@@ -33,7 +33,7 @@ const FilmPage = () => {
         <div className="flex flex-1 flex-col w-full">
           <h2 className="font-bold mb-[30px] text-[18px]">{film.title}</h2>
 
-          <div className="flex w-full justify-between flex-1 flex-col md:flex-row mb-[30px]">
+          <div className="flex w-full flex-1 flex-col md:flex-row mb-[30px] md:justify-between">
             <div className="w-full md:w-[45%] mb-[30px]">
               <h3 className="font-bold text-[16px]">Opening Crawl</h3>
               <div className="w-full h-[1px] mt-[10px] mb-[5px] bg-pinkish-grey"></div>
