@@ -16,6 +16,7 @@ export default {
       },
       boxShadow: {
         'header': '0 2px 0 0 #dadada',
+        'header-mobile': '0 2px 0 0 #0ab463',
       },
     },
   },
