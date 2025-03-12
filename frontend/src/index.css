@@ -7,14 +7,12 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+@layer components {
+  .custom-card {
+    @apply bg-white p-[30px] rounded-[4px] shadow-[0_1px_2px_0_#848484bf] border border-[#dadada] text-[14px];
+  }
 
-.custom-card {
-  background-color: white;
-  padding: 30px;
-  border-radius: 4px;
-  box-shadow: 0 1px 2px 0 #848484bf;
-  border: solid 1px #dadada;
-  background-color: #fff;
-
-  font-size: 14px;
+  .full-height-flex {
+    @apply flex-1 flex flex-col;
+  }
 }
