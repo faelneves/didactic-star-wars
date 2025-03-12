@@ -25,8 +25,7 @@ const PersonPage = () => {
   }, [id, fetchPerson]);
 
   return (
-    <div className="custom-card flex w-[95%] md:w-full mx-auto min-h-[420px] relative">
-
+    <div className="flex flex-col w-[85%] mx-auto min-h-[420px] relative max-md:full-height-flex md:custom-card md:w-full">
       {!person ? (
         <div className="flex-1 flex font-bold text-pinkish-grey items-center justify-center w-full">
           {error ? <span>Error: {error}</span> : <span>Loading...</span>}
@@ -61,14 +60,16 @@ const PersonPage = () => {
 
             </div>
           </div>
-          <div className="mt-auto">
-            <Link to="/">
-              <button className="bg-green-teal text-white font-bold py-[8px] px-[27px] rounded-[17px]">BACK TO SEARCH</button>
-            </Link>
-          </div>
         </div>
       )
       }
+      {person || error ? (
+        <div className="mt-auto">
+          <Link to="/">
+            <button className="max-md:w-full mb-[30px] bg-green-teal text-white font-bold py-[8px] px-[27px] rounded-[17px] md:mb-0">BACK TO SEARCH</button>
+          </Link>
+        </div>
+      ) : null}
     </div>
   );
 }
